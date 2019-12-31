@@ -31,9 +31,9 @@ class ServiceHost(object):
         service_stop_method: Callable[[None], None],
     ):
         instance = ServiceHost.get_instance()
-        if isinstance(service_start_method, Callable[[None], None]) is not True:
+        if hasattr(service_start_method, "__call__") is False:
             raise TypeError("service start method must be Callable[[None], None]")
-        if isinstance(service_stop_method, Callable[[None], None]) is not True:
+        if hasattr(service_stop_method, "__call__") is False:
             raise TypeError("service stop method must be Callable[[None], None]")
         instance._start_methods.append(service_start_method)
         instance._stop_methods.append(service_stop_method)
